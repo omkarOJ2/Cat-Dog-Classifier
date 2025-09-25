@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cat vs Dog Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        function showSpinner() {
+            document.getElementById("spinner").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        {% if result %}
+            <h2>Prediction: {{ result }}</h2>
+            {% if filename %}
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+            {% endif %}
+            <br>
+            <a href="/" class="btn">🔄 Try Another</a>
+        {% else %}
+            <h2>🐾 Cat vs Dog Classifier</h2>
+            <form method="POST" enctype="multipart/form-data" onsubmit="showSpinner()">
+                <input type="file" name="file" required>
+                <br>
+                <input type="submit" value="Predict 🧠">
+            </form>
+            <div id="spinner" class="spinner"></div>
+        {% endif %}
+    </div>
+</body>
+</html>
